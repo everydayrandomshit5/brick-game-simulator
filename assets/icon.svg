@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Royal Blue Console Casing -->
+    <linearGradient id="casingGrad" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#143b94"/>
+    </linearGradient>
+
+    <!-- Recessed Screen Bezel -->
+    <linearGradient id="bezelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#163c8a"/>
+      <stop offset="100%" stop-color="#1c4ba8"/>
+    </linearGradient>
+
+    <!-- Olive-Green Retro LCD Backplate -->
+    <linearGradient id="lcdGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a2ad8c"/>
+      <stop offset="100%" stop-color="#929d7d"/>
+    </linearGradient>
+
+    <!-- Glossy LCD Screen Glare -->
+    <linearGradient id="lcdGlare" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Classic Yellow Plastic Button -->
+    <radialGradient id="yellowBtn" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff59d"/>
+      <stop offset="48%" stop-color="#ffc820"/>
+      <stop offset="100%" stop-color="#c98700"/>
+    </radialGradient>
+
+    <!-- Outer Drop Shadow -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#050811" flood-opacity="0.45"/>
+    </filter>
+
+    <!-- Reusable Authentic Box-in-Box (回) LCD Brick: Active & Ghost -->
+    <g id="brick-on">
+      <rect x="0" y="0" width="38" height="38" rx="2" fill="#182013"/>
+      <rect x="6" y="6" width="26" height="26" fill="#9aa585"/>
+      <rect x="11" y="11" width="16" height="16" fill="#11170d"/>
+    </g>
+    <g id="brick-off" opacity="0.11">
+      <rect x="0" y="0" width="38" height="38" rx="2" fill="#182013"/>
+      <rect x="6" y="6" width="26" height="26" fill="#9aa585"/>
+      <rect x="11" y="11" width="16" height="16" fill="#11170d"/>
+    </g>
+  </defs>
+
+  <!-- Handheld Console Body -->
+  <g filter="url(#dropShadow)">
+    <rect x="76" y="20" width="360" height="472" rx="44" fill="url(#casingGrad)" stroke="#5b9bff" stroke-width="4"/>
+    <!-- Subtle inner bottom bevel -->
+    <rect x="82" y="26" width="348" height="460" rx="39" fill="none" stroke="#0d2a6b" stroke-opacity="0.45" stroke-width="4"/>
+  </g>
+
+  <!-- Speaker Grill Slits (Top Right) -->
+  <g fill="#0c2459" opacity="0.55">
+    <rect x="352" y="34" width="6" height="14" rx="3"/>
+    <rect x="364" y="34" width="6" height="14" rx="3"/>
+    <rect x="376" y="34" width="6" height="14" rx="3"/>
+    <rect x="388" y="34" width="6" height="14" rx="3"/>
+  </g>
+
+  <!-- Screen Bezel Frame -->
+  <rect x="102" y="54" width="308" height="242" rx="22" fill="url(#bezelGrad)" stroke="#0f2c6a" stroke-width="3"/>
+  <!-- Top Bezel Accent Lines -->
+  <rect x="122" y="64" width="90" height="3" rx="1.5" fill="#ffffff" opacity="0.4"/>
+  <rect x="300" y="64" width="90" height="3" rx="1.5" fill="#ffffff" opacity="0.4"/>
+  <rect x="224" y="61" width="64" height="9" rx="4.5" fill="#ffffff" opacity="0.82"/>
+
+  <!-- Classic Olive-Green LCD Glass -->
+  <rect x="120" y="78" width="272" height="202" rx="10" fill="url(#lcdGrad)" stroke="#4f5940" stroke-width="5"/>
+
+  <!-- LCD Playfield Inner Border -->
+  <rect x="129" y="87" width="254" height="184" rx="4" fill="none" stroke="#1a2213" stroke-width="3"/>
+
+  <!-- LCD Grid: 6 columns x 4 rows of 38x38 bricks (41px pitch) -->
+  <!-- Grid origin: x=135, y=99 -->
+  <g transform="translate(135, 99)">
+    <!-- Background Ghost Bricks (6x4) -->
+    <g>
+      <use href="#brick-off" x="0" y="0"/><use href="#brick-off" x="41" y="0"/><use href="#brick-off" x="82" y="0"/>
+      <use href="#brick-off" x="123" y="0"/><use href="#brick-off" x="164" y="0"/><use href="#brick-off" x="205" y="0"/>
+
+      <use href="#brick-off" x="0" y="41"/><use href="#brick-off" x="41" y="41"/><use href="#brick-off" x="82" y="41"/>
+      <use href="#brick-off" x="123" y="41"/><use href="#brick-off" x="164" y="41"/><use href="#brick-off" x="205" y="41"/>
+
+      <use href="#brick-off" x="0" y="82"/><use href="#brick-off" x="41" y="82"/><use href="#brick-off" x="82" y="82"/>
+      <use href="#brick-off" x="123" y="82"/><use href="#brick-off" x="164" y="82"/><use href="#brick-off" x="205" y="82"/>
+
+      <use href="#brick-off" x="0" y="123"/><use href="#brick-off" x="41" y="123"/><use href="#brick-off" x="82" y="123"/>
+      <use href="#brick-off" x="123" y="123"/><use href="#brick-off" x="164" y="123"/><use href="#brick-off" x="205" y="123"/>
+    </g>
+
+    <!-- Active Bricks: Falling T-Tetromino -->
+    <use href="#brick-on" x="82" y="0"/>
+    <use href="#brick-on" x="41" y="41"/>
+    <use href="#brick-on" x="82" y="41"/>
+    <use href="#brick-on" x="123" y="41"/>
+
+    <!-- Active Bricks: Bottom Stacked Shapes -->
+    <use href="#brick-on" x="0" y="82"/>
+    <use href="#brick-on" x="0" y="123"/>
+    <use href="#brick-on" x="41" y="123"/>
+    <use href="#brick-on" x="123" y="123"/>
+    <use href="#brick-on" x="164" y="123"/>
+    <use href="#brick-on" x="205" y="123"/>
+    <use href="#brick-on" x="205" y="82"/>
+  </g>
+
+  <!-- Subtle LCD Glass Glare -->
+  <path d="M123 81 H389 V148 C310 135 200 135 123 148 Z" fill="url(#lcdGlare)"/>
+
+  <!-- Molded Chassis Ridge -->
+  <rect x="80" y="307" width="352" height="5" fill="#0d2a6b" opacity="0.45"/>
+  <rect x="80" y="311" width="352" height="3" fill="#ffffff" opacity="0.22"/>
+
+  <!-- 4 Small Function Buttons -->
+  <g>
+    <circle cx="136" cy="334" r="10" fill="#0e2a66" opacity="0.45" transform="translate(0, 3)"/>
+    <circle cx="136" cy="334" r="10" fill="url(#yellowBtn)"/>
+
+    <circle cx="216" cy="334" r="10" fill="#0e2a66" opacity="0.45" transform="translate(0, 3)"/>
+    <circle cx="216" cy="334" r="10" fill="url(#yellowBtn)"/>
+
+    <circle cx="296" cy="334" r="10" fill="#0e2a66" opacity="0.45" transform="translate(0, 3)"/>
+    <circle cx="296" cy="334" r="10" fill="url(#yellowBtn)"/>
+
+    <circle cx="376" cy="334" r="10" fill="#0e2a66" opacity="0.45" transform="translate(0, 3)"/>
+    <circle cx="376" cy="334" r="10" fill="url(#yellowBtn)"/>
+  </g>
+
+  <!-- Left: Classic 4-Button Diamond D-Pad -->
+  <g>
+    <!-- Up -->
+    <circle cx="176" cy="376" r="19" fill="#0e2a66" opacity="0.45" transform="translate(0, 4)"/>
+    <circle cx="176" cy="376" r="19" fill="url(#yellowBtn)"/>
+    <!-- Down -->
+    <circle cx="176" cy="444" r="19" fill="#0e2a66" opacity="0.45" transform="translate(0, 4)"/>
+    <circle cx="176" cy="444" r="19" fill="url(#yellowBtn)"/>
+    <!-- Left -->
+    <circle cx="134" cy="410" r="19" fill="#0e2a66" opacity="0.45" transform="translate(0, 4)"/>
+    <circle cx="134" cy="410" r="19" fill="url(#yellowBtn)"/>
+    <!-- Right -->
+    <circle cx="218" cy="410" r="19" fill="#0e2a66" opacity="0.45" transform="translate(0, 4)"/>
+    <circle cx="218" cy="410" r="19" fill="url(#yellowBtn)"/>
+
+    <!-- Center Cross Marker -->
+    <rect x="173" y="401" width="6" height="18" rx="3" fill="#ffffff" opacity="0.65"/>
+    <rect x="167" y="407" width="18" height="6" rx="3" fill="#ffffff" opacity="0.65"/>
+  </g>
+
+  <!-- Right: Big Action / Rotate / Turbo Button -->
+  <g>
+    <circle cx="348" cy="410" r="40" fill="#0e2a66" opacity="0.5" transform="translate(0, 6)"/>
+    <circle cx="348" cy="410" r="40" fill="url(#yellowBtn)"/>
+    <circle cx="348" cy="410" r="34" fill="none" stroke="#ffffff" stroke-opacity="0.32" stroke-width="2.5"/>
+  </g>
+</svg>

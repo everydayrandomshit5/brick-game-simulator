@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title>BRICK GAME 9999 in 1</title>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="desktop-container">
+    <!-- Live Gamepad Status Pill -->
+    <div class="pad-pill" id="pad-status">Keyboard Ready (No Gamepad)</div>
+
+    <!-- Handheld Console Body -->
+    <div class="console-body">
+      <!-- Speaker grill slits at top right -->
+      <div class="speaker-grill">
+        <span></span><span></span><span></span><span></span>
+      </div>
+
+      <!-- Top Screen Bezel Section -->
+      <div class="bezel-frame">
+        <div class="bezel-header">
+          <div class="bezel-decor-left"></div>
+          <span class="bezel-title">SUPER</span>
+          <div class="bezel-decor-right"></div>
+        </div>
+
+        <div class="bezel-body">
+          <!-- Left Decorative Tetrominoes (matching E-9999 shell) -->
+          <div class="bezel-art bezel-art-left" aria-hidden="true">
+            <div class="t-shape cols-2">
+              <span class="b"></span><span></span>
+              <span class="b"></span><span class="b"></span>
+              <span class="b"></span><span></span>
+            </div>
+            <div class="t-shape cols-2">
+              <span class="b"></span><span></span>
+              <span class="b"></span><span></span>
+              <span class="b"></span><span class="b"></span>
+            </div>
+            <div class="t-shape cols-2">
+              <span class="b"></span><span class="b"></span>
+              <span class="b"></span><span class="b"></span>
+            </div>
+            <div class="t-shape cols-2">
+              <span></span><span class="b"></span>
+              <span class="b"></span><span class="b"></span>
+              <span class="b"></span><span></span>
+            </div>
+            <div class="t-shape cols-2">
+              <span class="b"></span><span class="b"></span>
+              <span class="b"></span><span></span>
+              <span class="b"></span><span></span>
+            </div>
+          </div>
+
+          <div class="screen-glass">
+            <!-- Main 10x20 + HUD LCD Canvas -->
+            <canvas id="lcd-screen" width="360" height="432"></canvas>
+          </div>
+
+          <!-- Right Decorative Tetrominoes -->
+          <div class="bezel-art bezel-art-right" aria-hidden="true">
+            <div class="t-shape cols-2">
+              <span class="b"></span><span class="b"></span>
+              <span></span><span class="b"></span>
+              <span></span><span class="b"></span>
+            </div>
+            <div class="t-shape cols-2">
+              <span class="b"></span><span></span>
+              <span class="b"></span><span class="b"></span>
+              <span></span><span class="b"></span>
+            </div>
+            <div class="t-shape cols-2">
+              <span class="b"></span><span></span>
+              <span class="b"></span><span></span>
+              <span class="b"></span><span></span>
+              <span class="b"></span><span></span>
+            </div>
+            <div class="t-shape cols-2">
+              <span></span><span class="b"></span>
+              <span class="b"></span><span class="b"></span>
+              <span></span><span class="b"></span>
+            </div>
+            <div class="t-shape cols-2">
+              <span class="b"></span><span class="b"></span>
+              <span class="b"></span><span class="b"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ergonomic Molded Chassis Ridge -->
+      <div class="console-ridge"></div>
+
+      <!-- Control Panel Section -->
+      <div class="controls-panel">
+        <!-- 4 Small Function Buttons: ON/OFF, START/PAUSE, SOUND, RESET -->
+        <div class="function-row">
+          <div class="f-btn-group">
+            <button class="round-btn sm-btn" id="btn-power" title="Power On/Off (O)"></button>
+            <label>ON/OFF</label>
+          </div>
+          <div class="f-btn-group">
+            <button class="round-btn sm-btn" id="btn-start" title="Xbox Start / Enter / P"></button>
+            <label>START<br><span>PAUSE</span></label>
+          </div>
+          <div class="f-btn-group">
+            <button class="round-btn sm-btn" id="btn-sound" title="Xbox Y / M"></button>
+            <label>SOUND</label>
+          </div>
+          <div class="f-btn-group">
+            <button class="round-btn sm-btn" id="btn-reset" title="Xbox Back / Esc / R"></button>
+            <label>RESET</label>
+          </div>
+        </div>
+
+        <!-- Main Gameplay Controls: Diamond D-Pad on Left, Big Action Button on Right -->
+        <div class="main-buttons-row">
+          <!-- Symmetric Diamond D-Pad Cross -->
+          <div class="dpad-diamond">
+            <span class="dpad-label label-up">UP</span>
+            <button class="round-btn med-btn dpad-pos-up" id="btn-up" title="Xbox D-Up / W"></button>
+
+            <span class="dpad-label label-left">LEFT<br><span>LEVEL</span></span>
+            <button class="round-btn med-btn dpad-pos-left" id="btn-left" title="Xbox D-Left / A"></button>
+
+            <div class="dpad-cross-center">✛</div>
+
+            <button class="round-btn med-btn dpad-pos-right" id="btn-right" title="Xbox D-Right / D"></button>
+            <span class="dpad-label label-right">RIGHT<br><span>SPEED</span></span>
+
+            <button class="round-btn med-btn dpad-pos-down" id="btn-down" title="Xbox D-Down / S"></button>
+            <span class="dpad-label label-down">DOWN<br><span>MODE</span></span>
+          </div>
+
+          <!-- Large Action Button -->
+          <div class="action-btn-wrapper">
+            <button class="round-btn big-btn" id="btn-action" title="Xbox A / X / RT / Space"></button>
+            <label class="action-label">ROTATE<br><span>DIRECTION / TURBO</span></label>
+          </div>
+        </div>
+
+        <!-- Classic Slanted Logo -->
+        <div class="console-logo">
+          <div class="logo-text">
+            <span>BRICK</span>
+            <strong>GAME</strong>
+          </div>
+          <div class="sub-logo">9999 in 1</div>
+          <div class="model-badge">E-9999</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Controller Guide Bar at Bottom -->
+    <div class="controller-hint">
+      <span><strong>D-Pad/Stick</strong> = Move/Select</span>
+      <span>•</span>
+      <span><strong>A / Space</strong> = Action/Turbo/Launch</span>
+      <span>•</span>
+      <span><strong>Start / Enter</strong> = Start/Pause</span>
+      <span>•</span>
+      <span><strong>Back / Esc</strong> = Menu</span>
+    </div>
+  </div>
+
+  <script src="src/audio.js"></script>
+  <script src="src/input.js"></script>
+  <script src="src/lcd.js"></script>
+  <script src="src/games/menu.js"></script>
+  <script src="src/games/racing.js"></script>
+  <script src="src/games/tetris.js"></script>
+  <script src="src/games/tanks.js"></script>
+  <script src="src/games/breakout.js"></script>
+  <script src="src/games/frogger.js"></script>
+  <script src="src/games/whack.js"></script>
+  <script src="src/games/snake.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>

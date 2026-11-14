@@ -1,0 +1,460 @@
+/* Retro LCD Brick Game Simulator Stylesheet */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background: radial-gradient(circle at 50% 20%, #1e2433 0%, #0e111a 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  padding: 2px 4px;
+}
+
+.desktop-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Gamepad status badge */
+.pad-pill {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 1px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #9aa4b8;
+  transition: all 0.3s ease;
+}
+
+.pad-pill.connected {
+  background: rgba(46, 204, 113, 0.15);
+  border-color: #2ecc71;
+  color: #4ade80;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+}
+
+/* Handheld Console Casing */
+.console-body {
+  width: 436px;
+  background: linear-gradient(165deg, #2b6fd9 0%, #1c52b8 60%, #16439c 100%);
+  border-radius: 22px 22px 28px 28px;
+  padding: 5px 9px 5px 9px;
+  box-shadow:
+    0 22px 45px rgba(0, 0, 0, 0.65),
+    inset 0 2px 4px rgba(255, 255, 255, 0.35),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.45);
+  border: 1px solid #3c7ce6;
+  position: relative;
+}
+
+/* Speaker slits */
+.speaker-grill {
+  position: absolute;
+  top: 7px;
+  right: 16px;
+  display: flex;
+  gap: 4px;
+}
+
+.speaker-grill span {
+  width: 4px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 2px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Screen Bezel Frame */
+.bezel-frame {
+  background: #194498;
+  border-radius: 12px;
+  padding: 3px 4px 4px 4px;
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.5),
+    0 1px 1px rgba(255, 255, 255, 0.2);
+  border: 1px solid #14377d;
+  margin-top: 0;
+}
+
+.bezel-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1px;
+}
+
+.bezel-title {
+  font-family: 'Arial Black', Impact, sans-serif;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.bezel-decor-left, .bezel-decor-right {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.bezel-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+/* Decorative white-outlined tetromino shapes on bezel sides */
+.bezel-art {
+  width: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 4px 0;
+  opacity: 0.78;
+}
+
+.t-shape {
+  display: grid;
+  gap: 1px;
+}
+
+.t-shape.cols-2 {
+  grid-template-columns: repeat(2, 7px);
+  grid-auto-rows: 7px;
+}
+
+.t-shape span {
+  width: 7px;
+  height: 7px;
+  display: block;
+}
+
+.t-shape span.b {
+  border: 1.2px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(25, 68, 152, 0.65);
+}
+
+.screen-glass {
+  box-sizing: content-box;
+  width: 360px;
+  height: 432px;
+  background: #9aa585;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.45),
+    0 0 2px rgba(0, 0, 0, 0.3);
+  border: 2px solid #636d54;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Glass glare reflection */
+.screen-glass::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+#lcd-screen {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Ergonomic Molded Chassis Ridge */
+.console-ridge {
+  height: 4px;
+  margin: 2px -9px 1px -9px;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(0, 0, 0, 0.25) 75%,
+    rgba(0, 0, 0, 0.06) 100%
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.28);
+}
+
+/* Control Panel Section */
+.controls-panel {
+  margin-top: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Function Buttons (4 small yellow buttons) */
+.function-row {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 22px;
+}
+
+.f-btn-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.f-btn-group label {
+  font-size: 7px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  line-height: 1;
+}
+
+.f-btn-group label span {
+  color: #ffd043;
+}
+
+/* Round Yellow Plastic Buttons */
+.round-btn {
+  background: radial-gradient(circle at 35% 30%, #fff176 0%, #ffc820 50%, #d89600 100%);
+  border: none;
+  border-radius: 50%;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.45),
+    inset 0 2px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -3px 4px rgba(180, 110, 0, 0.8);
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+.round-btn:hover {
+  filter: brightness(1.05);
+}
+
+.round-btn:active, .round-btn.active {
+  transform: translateY(3px) scale(0.97);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(0, 0, 0, 0.4),
+    inset 0 3px 5px rgba(180, 110, 0, 0.9);
+}
+
+.sm-btn {
+  width: 16px;
+  height: 16px;
+}
+
+.med-btn {
+  width: 30px;
+  height: 30px;
+}
+
+.big-btn {
+  width: 54px;
+  height: 54px;
+}
+
+/* Main Buttons Row (Diamond D-Pad & Big Action Button) */
+.main-buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+/* Symmetric Diamond D-Pad */
+.dpad-diamond {
+  position: relative;
+  width: 196px;
+  height: 106px;
+}
+
+.dpad-diamond .round-btn {
+  position: absolute;
+}
+
+.dpad-pos-up {
+  left: 83px;
+  top: 10px;
+}
+
+.dpad-pos-down {
+  left: 83px;
+  top: 60px;
+}
+
+.dpad-pos-left {
+  left: 49px;
+  top: 35px;
+}
+
+.dpad-pos-right {
+  left: 117px;
+  top: 35px;
+}
+
+.dpad-cross-center {
+  position: absolute;
+  left: 98px;
+  top: 50px;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.dpad-label {
+  position: absolute;
+  font-size: 7px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.4px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.dpad-label span {
+  color: #ffd043;
+}
+
+.label-up {
+  top: 0;
+  left: 98px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.label-down {
+  top: 92px;
+  left: 98px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.label-left {
+  left: 0;
+  top: 50px;
+  transform: translateY(-50%);
+  width: 45px;
+  text-align: right;
+}
+
+.label-right {
+  right: 0;
+  top: 50px;
+  transform: translateY(-50%);
+  width: 45px;
+  text-align: left;
+}
+
+/* Big Action Button */
+.action-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-right: 16px;
+}
+
+.action-label {
+  font-size: 8px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.7px;
+  line-height: 1.1;
+}
+
+.action-label span {
+  color: #ffd043;
+  font-size: 7px;
+}
+
+/* Classic Angled Console Logo */
+.console-logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 12px;
+  margin-top: -3px;
+}
+
+.logo-text {
+  transform: rotate(-10deg);
+  transform-origin: left bottom;
+  color: #fff;
+  line-height: 0.9;
+}
+
+.logo-text span {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  display: block;
+}
+
+.logo-text strong {
+  font-family: 'Arial Black', Impact, sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #ffd043;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.sub-logo {
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 1px;
+}
+
+.model-badge {
+  font-size: 9px;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Bottom Hint Bar */
+.controller-hint {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  font-size: 9px;
+  color: #8c98ad;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.controller-hint strong {
+  color: #ffd043;
+}

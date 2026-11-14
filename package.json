@@ -1,0 +1,31 @@
+{
+  "name": "brick-game-simulator",
+  "version": "1.0.0",
+  "description": "Authentic Retro LCD Brick Game 9999-in-1 Simulator with Gamepad Support",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "brick-game",
+    "retro",
+    "lcd",
+    "tetris",
+    "racing",
+    "gamepad",
+    "xinput"
+  ],
+  "author": "everydayrandomshit5",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/everydayrandomshit5/brick-game-simulator.git"
+  },
+  "homepage": "https://github.com/everydayrandomshit5/brick-game-simulator#readme",
+  "bugs": {
+    "url": "https://github.com/everydayrandomshit5/brick-game-simulator/issues"
+  },
+  "devDependencies": {
+    "electron": "^45.3.2"
+  }
+}

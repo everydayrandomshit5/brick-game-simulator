@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Brick Game 9999-in-1 Simulator
+GenericName=Retro LCD Handheld Simulator
+Comment=Retro 90s Handheld LCD Brick Game 9999-in-1 Simulator
+# Tip: Run ./run.sh --install-desktop to install with resolved absolute paths
+Exec=sh -c 'exec "$(dirname "$1")/run.sh"' _ %k
+Icon=assets/icon.png
+Terminal=false
+Categories=Game;ArcadeGame;
+Keywords=retro;tetris;lcd;handheld;gamepad;
+StartupNotify=true
