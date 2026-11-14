@@ -63,7 +63,10 @@
     "gamepad",
     "xinput"
   ],
-  "author": "everydayrandomshit5",
+  "author": {
+    "name": "everydayrandomshit5",
+    "email": "everyday.randomshit5@gmail.com"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
