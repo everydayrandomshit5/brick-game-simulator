@@ -29,6 +29,7 @@ class BreakoutGame {
     this.wasPaused = false;
     this.gameOver = false;
     this.isBallLaunched = false;
+    this.visitedBounceStates = new Set();
 
     this.lastTickTime = 0;
     this.initBricks();
@@ -62,6 +63,7 @@ class BreakoutGame {
 
   initBricks() {
     this.bricks = [];
+    this.visitedBounceStates = new Set();
     const numRows = Math.min(7, 3 + Math.ceil(this.level / 2));
     const startRow = 2;
     const endRow = startRow + numRows - 1;
@@ -150,6 +152,7 @@ class BreakoutGame {
     if (!this.isBallLaunched) {
       if (input.justPressed('ACTION') || input.justPressed('UP')) {
         this.isBallLaunched = true;
+        if (this.visitedBounceStates) this.visitedBounceStates.clear();
         this.ballVx = Math.random() < 0.5 ? 1 : -1;
         this.ballVy = -1;
         this.sound.rotate();
@@ -196,6 +199,7 @@ class BreakoutGame {
     const idx = this.findBrick(x, y);
     if (idx !== -1) {
       this.bricks.splice(idx, 1);
+      if (this.visitedBounceStates) this.visitedBounceStates.clear();
       this.score += 20;
       this.saveHighScore();
       this.sound.drop();
@@ -269,22 +273,56 @@ class BreakoutGame {
 
       if (hitsAtCandidate || hitsDirectlyBelow) {
         this.ballVy = -1;
-        const hitCol = hitsAtCandidate ? candidateX : this.ballX;
+
+        const hitCol = hitsDirectlyBelow ? this.ballX : candidateX;
+        const isCenterHit = hitCol === this.paddleX + 1;
+
         if (hitCol === this.paddleX) {
           this.ballVx = -1;
         } else if (hitCol === this.paddleX + this.paddleWidth - 1) {
           this.ballVx = 1;
         }
 
-        let nextX = this.ballX + this.ballVx;
-        if (nextX < 0) {
+        let nextX = isCenterHit ? this.ballX : (this.ballX + this.ballVx);
+        if (nextX <= 0) {
           nextX = 0;
           this.ballVx = 1;
-        } else if (nextX >= this.COLS) {
+        } else if (nextX >= this.COLS - 1) {
           nextX = this.COLS - 1;
           this.ballVx = -1;
         }
 
+        if (!this.visitedBounceStates) {
+          this.visitedBounceStates = new Set();
+        }
+
+        let stateKey = nextX + ':' + this.ballVx;
+        if (this.visitedBounceStates.has(stateKey)) {
+          if (this.visitedBounceStates.size >= 18) {
+            this.visitedBounceStates.clear();
+          }
+          let found = null;
+          for (const dx of [0, -1, 1, -2, 2]) {
+            const cx = this.ballX + dx;
+            if (cx < 0 || cx >= this.COLS) continue;
+            for (const cvx of [this.ballVx, -this.ballVx]) {
+              const nvx = (cx === 0) ? 1 : (cx === this.COLS - 1 ? -1 : cvx);
+              const k = cx + ':' + nvx;
+              if (!this.visitedBounceStates.has(k)) {
+                found = { x: cx, vx: nvx, key: k };
+                break;
+              }
+            }
+            if (found) break;
+          }
+          if (found) {
+            nextX = found.x;
+            this.ballVx = found.vx;
+            stateKey = found.key;
+          }
+        }
+
+        this.visitedBounceStates.add(stateKey);
         this.ballX = nextX;
         this.ballY = this.paddleY - 2; // Row 17: bounce cleanly off paddle without overlapping row 19
         this.sound.rotate();
@@ -324,6 +362,7 @@ class BreakoutGame {
     this.wasPaused = false;
     this.isBallLaunched = false;
     this.isTurbo = false;
+    if (this.visitedBounceStates) this.visitedBounceStates.clear();
     this.paddleX = 3;
     this.ballX = 4;
     this.ballY = 18;
