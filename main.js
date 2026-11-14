@@ -1,8 +1,10 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-// Isolate user data to project directory to avoid locks
-app.setPath('userData', path.join(__dirname, '.userData'));
+// Isolate user data to project directory in dev to avoid locks
+if (!app.isPackaged) {
+  app.setPath('userData', path.join(__dirname, '.userData'));
+}
 
 let mainWindow = null;
 

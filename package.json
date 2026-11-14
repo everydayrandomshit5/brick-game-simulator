@@ -4,7 +4,55 @@
   "description": "Authentic Retro LCD Brick Game 9999-in-1 Simulator with Gamepad Support",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder --publish never"
+  },
+  "build": {
+    "appId": "com.everydayrandomshit5.brickgamesimulator",
+    "productName": "Brick Game 9999-in-1",
+    "artifactName": "${name}-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "main.js",
+      "styles.css",
+      "src/**/*",
+      "assets/**/*",
+      "LICENSE"
+    ],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ]
+    },
+    "nsis": {
+      "artifactName": "${name}-${version}-win-${arch}-setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "${name}-${version}-win-${arch}-portable.${ext}"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "category": "Game",
+      "target": [
+        { "target": "AppImage", "arch": ["x64"] },
+        { "target": "deb", "arch": ["x64"] },
+        { "target": "tar.gz", "arch": ["x64"] }
+      ]
+    },
+    "mac": {
+      "icon": "assets/icon.png",
+      "category": "public.app-category.arcade-games",
+      "identity": null,
+      "target": [
+        { "target": "dmg", "arch": ["arm64", "x64"] },
+        { "target": "zip", "arch": ["arm64", "x64"] }
+      ]
+    }
   },
   "keywords": [
     "brick-game",
@@ -26,6 +74,7 @@
     "url": "https://github.com/everydayrandomshit5/brick-game-simulator/issues"
   },
   "devDependencies": {
-    "electron": "^45.3.2"
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0"
   }
 }
